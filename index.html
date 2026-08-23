@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="VitaNord Fisio — fisioterapia clínica en Torrevieja. Terapia manual, ejercicio guiado y seguimiento cercano en cada fase de tu recuperación.">
+<title>VitaNord Fisio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='%230e3733'/%3E%3Cpath d='M8 23c3-6 6-9 12-9s9 3 12 9' stroke='%238fcec3' stroke-width='2.2' stroke-linecap='round' fill='none'/%3E%3Cpath d='M8 27c3-6 6-9 12-9s9 3 12 9' stroke='%23fdfbf6' stroke-width='2.2' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+  :root {
+    --pine-900: #0e3733;
+    --pine-800: #123f3b;
+    --teal-600: #2c8c82;
+    --teal-500: #3aa196;
+    --teal-300: #8fcec3;
+    --teal-100: #d7ece7;
+    --birch-50: #f7f3ea;
+    --mist-100: #e9f1ee;
+    --ink-900: #16302c;
+    --ink-600: #3f5652;
+    --paper: var(--birch-50);
+    --surface: #ffffff;
+    --surface-alt: var(--mist-100);
+    --text: var(--ink-900);
+    --text-muted: var(--ink-600);
+    --accent: var(--teal-600);
+    --accent-strong: var(--pine-900);
+    --hairline: rgba(14, 55, 51, 0.16);
+    --focus: #1c6d63;
+    --placeholder-bg: #fbf0dd;
+    --placeholder-border: #d9a464;
+    --placeholder-text: #6b4f22;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0b201e;
+      --surface: #102b27;
+      --surface-alt: #0e2622;
+      --text: #eaf3f0;
+      --text-muted: #a9c4bd;
+      --accent: #6bbbae;
+      --accent-strong: #9fd8cc;
+      --hairline: rgba(234, 243, 240, 0.14);
+      --focus: #9fd8cc;
+      --placeholder-bg: #2a2013;
+      --placeholder-border: #b98a49;
+      --placeholder-text: #e6c793;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #0b201e;
+    --surface: #102b27;
+    --surface-alt: #0e2622;
+    --text: #eaf3f0;
+    --text-muted: #a9c4bd;
+    --accent: #6bbbae;
+    --accent-strong: #9fd8cc;
+    --hairline: rgba(234, 243, 240, 0.14);
+    --focus: #9fd8cc;
+    --placeholder-bg: #2a2013;
+    --placeholder-border: #b98a49;
+    --placeholder-text: #e6c793;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--text);
+    font-family: 'Karla', -apple-system, 'Segoe UI', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img, svg { max-width: 100%; display: block; }
+
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    color: var(--text);
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  .eyebrow {
+    font-family: 'Karla', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---------- Header ---------- */
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+
+  .brand-mark { width: 34px; height: 34px; flex: none; }
+
+  .brand-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+
+  nav.links {
+    display: flex;
+    gap: clamp(1rem, 2vw, 2rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.95rem;
+  }
+
+  nav.links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  nav.links a:hover { color: var(--text); border-color: var(--accent); }
+
+  .nav-actions { display: flex; align-items: center; gap: 1rem; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: 'Karla', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 0.7rem 1.35rem;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn:active { transform: translateY(1px); }
+
+  .btn-primary { background: var(--accent-strong); color: #fdfbf6; }
+  .btn-primary:hover { background: var(--accent); }
+
+  .btn-ghost { background: transparent; color: var(--text); border-color: var(--hairline); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .btn-outline-invert { background: transparent; color: #fdfbf6; border-color: rgba(253,251,246,0.4); }
+  .btn-outline-invert:hover { border-color: #fdfbf6; }
+
+  .menu-toggle { display: none; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: clamp(3rem, 7vw, 6rem) 0 clamp(2.5rem, 6vw, 4rem);
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.3rem, 4.4vw, 3.4rem);
+    line-height: 1.08;
+    margin-top: 0.7rem;
+  }
+
+  .hero .lede {
+    font-size: 1.14rem;
+    color: var(--text-muted);
+    max-width: 46ch;
+    margin-top: 1.15rem;
+  }
+
+  .hero-cta { display: flex; gap: 0.9rem; margin-top: 1.9rem; flex-wrap: wrap; }
+
+  .trust-line {
+    margin-top: 1.75rem;
+    display: flex;
+    gap: 0.6rem 1.4rem;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+  .trust-line span { display: flex; align-items: center; gap: 0.45rem; }
+  .trust-line svg { width: 15px; height: 15px; color: var(--accent); flex: none; }
+
+  .hero-art { position: relative; }
+  .hero-art svg { width: 100%; height: auto; }
+
+  /* wave divider */
+  .wave-divider { display: block; width: 100%; line-height: 0; }
+  .wave-divider svg { width: 100%; height: clamp(40px, 6vw, 70px); display: block; }
+
+  /* ---------- Section scaffolding ---------- */
+  section { padding: clamp(3.5rem, 7vw, 5.5rem) 0; }
+  .section-alt { background: var(--surface-alt); }
+
+  .section-head { max-width: 62ch; margin-bottom: clamp(2rem, 4vw, 3rem); }
+  .section-head h2 {
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    margin-top: 0.6rem;
+  }
+  .section-head .lede { color: var(--text-muted); margin-top: 0.85rem; font-size: 1.04rem; }
+
+  /* ---------- Services ---------- */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+  }
+
+  .service-card {
+    background: var(--surface);
+    padding: 2rem 1.7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .service-icon {
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+  }
+  .service-icon svg { width: 26px; height: 26px; }
+
+  .service-card h3 { font-size: 1.08rem; font-weight: 600; }
+  .service-card p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
+
+  /* ---------- Approach ---------- */
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .approach-item { display: flex; flex-direction: column; gap: 0.7rem; }
+  .approach-num {
+    font-family: 'Fraunces', serif;
+    font-size: 0.95rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 0.6rem;
+  }
+  .approach-item h3 { font-size: 1.12rem; }
+  .approach-item p { margin: 0; color: var(--text-muted); font-size: 0.96rem; }
+
+  /* ---------- About ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+
+  .about-copy p { color: var(--text-muted); font-size: 1.03rem; margin: 1rem 0 0; }
+  .about-copy p:first-of-type { margin-top: 1.1rem; }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .stat { border-left: 2px solid var(--accent); padding-left: 1rem; }
+  .stat .n { font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 600; }
+  .stat .l { color: var(--text-muted); font-size: 0.88rem; }
+
+  .about-art { border: 1px solid var(--hairline); background: var(--surface); padding: 2rem; }
+  .about-art ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.1rem; }
+  .about-art li { display: flex; gap: 0.85rem; align-items: flex-start; font-size: 0.98rem; color: var(--text); }
+  .about-art li svg { width: 20px; height: 20px; color: var(--accent); flex: none; margin-top: 0.15rem; }
+
+  /* ---------- Testimonials ---------- */
+  .placeholder-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--placeholder-text);
+    background: var(--placeholder-bg);
+    border: 1px solid var(--placeholder-border);
+    padding: 0.4rem 0.8rem;
+    border-radius: 3px;
+    margin-bottom: 1.2rem;
+  }
+
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .testimonial {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .testimonial q { font-size: 1rem; color: var(--text); font-style: normal; quotes: none; }
+  .testimonial-who { display: flex; align-items: center; gap: 0.7rem; margin-top: auto; }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--teal-100); color: var(--pine-900);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 0.95rem; flex: none;
+  }
+  .testimonial-who .name { font-weight: 700; font-size: 0.92rem; }
+  .testimonial-who .cond { font-size: 0.82rem; color: var(--text-muted); }
+
+  /* ---------- Hours + location ---------- */
+  .hl-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 1.9rem;
+  }
+  .info-card h3 { font-size: 1.05rem; margin-bottom: 1.1rem; display: flex; align-items: center; gap: 0.6rem; }
+  .info-card h3 svg { width: 19px; height: 19px; color: var(--accent); }
+
+  table.hours { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  table.hours td { padding: 0.55rem 0; border-bottom: 1px solid var(--hairline); }
+  table.hours tr:last-child td { border-bottom: none; }
+  table.hours td:first-child { color: var(--text-muted); }
+  table.hours td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .map-art {
+    border: 1px solid var(--hairline);
+    background: var(--surface-alt);
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .map-art svg { width: 100%; height: 100%; position: absolute; inset: 0; opacity: 0.9; }
+  .map-pin { position: relative; z-index: 1; text-align: center; }
+  .map-pin svg.pin-icon { width: 30px; height: 30px; color: var(--pine-900); margin: 0 auto 0.5rem; }
+  .map-pin .addr { font-size: 0.88rem; color: var(--text-muted); }
+
+  /* ---------- Contact ---------- */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .contact-list { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 1.1rem; }
+  .contact-list li { display: flex; gap: 0.85rem; align-items: flex-start; }
+  .contact-list svg { width: 20px; height: 20px; color: var(--accent); flex: none; margin-top: 0.15rem; }
+  .contact-list .label { font-size: 0.82rem; color: var(--text-muted); }
+  .contact-list .value { font-weight: 600; }
+  .ph { color: var(--placeholder-text); background: var(--placeholder-bg); padding: 0 0.3rem; border-radius: 2px; font-weight: 600; }
+
+  form.contact-form { display: flex; flex-direction: column; gap: 1.1rem; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field label { font-size: 0.86rem; font-weight: 700; color: var(--text-muted); }
+  .field input, .field textarea {
+    font: inherit;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 3px;
+  }
+  .field input:focus, .field textarea:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
+  .field textarea { resize: vertical; min-height: 110px; }
+  .form-note { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+  #form-success {
+    display: none;
+    font-size: 0.92rem;
+    padding: 0.85rem 1rem;
+    background: var(--teal-100);
+    color: var(--pine-900);
+    border: 1px solid var(--teal-300);
+    border-radius: 3px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer.site {
+    background: var(--pine-900);
+    color: #d9e9e5;
+    padding: clamp(3rem, 6vw, 4rem) 0 1.75rem;
+  }
+  footer.site .brand-name { color: #fdfbf6; }
+  footer.site .footer-top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(217,233,229,0.18);
+  }
+  footer.site .tagline { color: rgba(217,233,229,0.75); font-size: 0.95rem; max-width: 32ch; margin-top: 0.9rem; }
+  footer.site h4 { font-family: 'Karla', sans-serif; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(217,233,229,0.55); margin-bottom: 1rem; }
+  footer.site ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.65rem; }
+  footer.site a { text-decoration: none; color: rgba(217,233,229,0.85); font-size: 0.94rem; }
+  footer.site a:hover { color: #fdfbf6; }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    font-size: 0.85rem;
+    color: rgba(217,233,229,0.55);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    nav.links { display: none; }
+    .menu-toggle {
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      width: 40px; height: 40px;
+      border: 1px solid var(--hairline);
+      background: transparent; border-radius: 3px; cursor: pointer;
+      color: var(--text);
+    }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-art { order: -1; max-width: 380px; margin: 0 auto; }
+    .about-grid, .hl-grid, .contact-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .nav-actions .btn-ghost { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a class="brand" href="#inicio" aria-label="VitaNord Fisio — inicio">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="var(--pine-900)"/>
+        <path d="M8 23c3-6 6-9 12-9s9 3 12 9" stroke="var(--teal-300)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <path d="M8 27c3-6 6-9 12-9s9 3 12 9" stroke="#fdfbf6" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <span class="brand-name">VitaNord Fisio</span>
+    </a>
+    <nav class="links" aria-label="Navegación principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#enfoque">Enfoque</a>
+      <a href="#nosotros">Sobre nosotros</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="#contacto" id="nav-phone">Llamar</a>
+      <a class="btn btn-primary" href="#contacto">Reservar cita</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="links" id="mobileMenu" aria-label="Navegación móvil" style="display:none; flex-direction:column; padding:0 0 1.2rem; gap:0.9rem;">
+    <a href="#servicios">Servicios</a>
+    <a href="#enfoque">Enfoque</a>
+    <a href="#nosotros">Sobre nosotros</a>
+    <a href="#testimonios">Testimonios</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Fisioterapia clínica en Torrevieja</p>
+        <h1>Vuelve a moverte, sin dolor y con criterio.</h1>
+        <p class="lede">En VitaNord Fisio combinamos terapia manual, ejercicio guiado y seguimiento cercano para que recuperes tu movilidad al ritmo que tu cuerpo necesita.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#contacto">Reservar cita</a>
+          <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+        </div>
+        <div class="trust-line">
+          <span><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Fisioterapeutas colegiados</span>
+          <span><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Planes individualizados</span>
+          <span><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Seguimiento continuo</span>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 460 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustración abstracta de olas nórdicas">
+          <path d="M40 210c40-60 80-90 130-90s90 30 130 90 90 90 130 90" stroke="var(--teal-300)" stroke-width="3" fill="none" opacity="0.55"/>
+          <path d="M20 260c40-55 80-82 130-82s90 27 130 82 90 82 150 82" stroke="var(--teal-500)" stroke-width="3" fill="none" opacity="0.7"/>
+          <path d="M10 310c45-50 85-75 140-75s95 25 140 75 95 75 150 75" stroke="var(--pine-900)" stroke-width="3.5" fill="none"/>
+          <circle cx="330" cy="120" r="46" fill="var(--teal-100)"/>
+          <circle cx="330" cy="120" r="46" fill="none" stroke="var(--teal-500)" stroke-width="2"/>
+          <path d="M312 120a18 18 0 1136 0 18 18 0 01-36 0z" stroke="var(--pine-900)" stroke-width="2.4" fill="none"/>
+          <path d="M330 138v22M320 176h20" stroke="var(--pine-900)" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0 35c120-30 240-30 360 0s240 30 360 0 240-30 360 0 240 30 360 0V70H0V35z" fill="var(--surface-alt)"/></svg>
+  </div>
+
+  <section class="section-alt" id="servicios">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Servicios</p>
+        <h2>Tratamientos pensados para cada fase de tu recuperación</h2>
+        <p class="lede">Desde la primera valoración hasta la vuelta a tu actividad diaria, adaptamos cada plan a tu diagnóstico, tu ritmo y tus objetivos.</p>
+      </div>
+      <div class="services-grid">
+
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v4M12 17v4M5 12H3M21 12h-2M7.5 7.5L6 6M18 18l-1.5-1.5M16.5 7.5L18 6M6 18l1.5-1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7"/></svg></div>
+          <h3>Fisioterapia general</h3>
+          <p>Evaluación y tratamiento de dolores musculares, articulares y posturales del día a día.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20l6-6M14 10l6-6M8 8l8 8M6 6l2 2M16 16l2 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="6" cy="6" r="2" stroke="currentColor" stroke-width="1.7"/><circle cx="18" cy="18" r="2" stroke="currentColor" stroke-width="1.7"/></svg></div>
+          <h3>Fisioterapia deportiva</h3>
+          <p>Prevención y recuperación de lesiones para deportistas de cualquier nivel.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21c-4-3-8-6.5-8-11a5 5 0 019-3 5 5 0 019 3c0 4.5-4 8-8 11l-1 1-1-1z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M7 10h2l1.5-3L13 13l1.5-3H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Rehabilitación post-quirúrgica</h3>
+          <p>Programas de recuperación progresiva tras cirugías traumatológicas.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6 12c0-3.5 2.5-7 6-7s6 3.5 6 7-2.5 7-6 7-6-3.5-6-7z" stroke="currentColor" stroke-width="1.7"/><path d="M9 12c1-1.5 2-1.5 3 0s2 1.5 3 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+          <h3>Terapia manual</h3>
+          <p>Movilizaciones y técnicas manuales para aliviar el dolor y mejorar la movilidad.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></div>
+          <h3>Punción seca</h3>
+          <p>Tratamiento de puntos gatillo miofasciales para la tensión muscular crónica.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h3l2 6 4-12 2 6h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Electroterapia</h3>
+          <p>Corrientes terapéuticas como apoyo complementario al tratamiento manual.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6 20V10M12 20V4M18 20v-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></div>
+          <h3>Ejercicio terapéutico</h3>
+          <p>Planes de ejercicio guiado y progresivo, adaptados a cada paciente.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M6 21c0-4 2.5-6.5 6-6.5s6 2.5 6 6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M3.5 21c.3-2.6 1.5-4.3 3-5.3M20.5 21c-.3-2.6-1.5-4.3-3-5.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <h3>Fisioterapia geriátrica</h3>
+          <p>Programas adaptados para mantener la movilidad, el equilibrio y la autonomía.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="enfoque">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Nuestro enfoque</p>
+        <h2>Cuatro principios detrás de cada tratamiento</h2>
+      </div>
+      <div class="approach-grid">
+        <div class="approach-item">
+          <span class="approach-num">01</span>
+          <h3>Trato cercano</h3>
+          <p>Cada sesión empieza escuchando cómo te encuentras, no solo revisando el historial clínico.</p>
+        </div>
+        <div class="approach-item">
+          <span class="approach-num">02</span>
+          <h3>Planes individualizados</h3>
+          <p>Ningún tratamiento se copia de un paciente a otro: diseñamos el plan según tu diagnóstico y tu vida.</p>
+        </div>
+        <div class="approach-item">
+          <span class="approach-num">03</span>
+          <h3>Seguimiento continuo</h3>
+          <p>Medimos el progreso sesión a sesión y ajustamos el plan cuando hace falta.</p>
+        </div>
+        <div class="approach-item">
+          <span class="approach-num">04</span>
+          <h3>Instalaciones cuidadas</h3>
+          <p>Espacio accesible, tranquilo y equipado para tratamiento manual y ejercicio guiado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt" id="nosotros">
+    <div class="wrap about-grid">
+      <div>
+        <p class="eyebrow">Sobre nosotros</p>
+        <h2>Fisioterapia con tiempo, calma y un plan claro</h2>
+        <div class="about-copy">
+          <p>VitaNord Fisio nace de una idea sencilla: la recuperación funciona mejor cuando hay tiempo para escuchar, un diagnóstico claro y un plan que se ajusta a cada persona.</p>
+          <p>Nuestro equipo de fisioterapeutas colegiados combina terapia manual, ejercicio terapéutico y herramientas de seguimiento para acompañarte desde la primera valoración hasta que vuelvas a hacer lo que te gusta, sin dolor.</p>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><div class="n">[X]</div><div class="l">años de experiencia combinada</div></div>
+          <div class="stat"><div class="n">[X]</div><div class="l">pacientes atendidos</div></div>
+        </div>
+      </div>
+      <div class="about-art">
+        <ul>
+          <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Valoración inicial completa antes de empezar cualquier tratamiento</li>
+          <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Sesiones individuales, sin prisas ni tratamientos en cadena</li>
+          <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ejercicios y pautas claras para seguir en casa entre sesiones</li>
+          <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comunicación directa con tu fisioterapeuta durante todo el proceso</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonios">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Testimonios</p>
+        <h2>Lo que dicen nuestros pacientes</h2>
+        <span class="placeholder-flag">⚠ Contenido de ejemplo — sustituir por testimonios reales antes de publicar</span>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial">
+          <q>[Aquí irá el testimonio real de un paciente: qué le trajo a la clínica, cómo fue el trato y qué resultado obtuvo.]</q>
+          <div class="testimonial-who">
+            <div class="avatar">[N]</div>
+            <div>
+              <div class="name">[Nombre del paciente]</div>
+              <div class="cond">[Motivo de consulta, ej. lumbalgia]</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <q>[Testimonio de ejemplo. Sustituir por una reseña real, con permiso del paciente para publicarla.]</q>
+          <div class="testimonial-who">
+            <div class="avatar">[N]</div>
+            <div>
+              <div class="name">[Nombre del paciente]</div>
+              <div class="cond">[Motivo de consulta, ej. rehabilitación deportiva]</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <q>[Testimonio de ejemplo. Ideal: una frase concreta sobre el antes y el después del tratamiento.]</q>
+          <div class="testimonial-who">
+            <div class="avatar">[N]</div>
+            <div>
+              <div class="name">[Nombre del paciente]</div>
+              <div class="cond">[Motivo de consulta, ej. dolor cervical]</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt" id="ubicacion">
+    <div class="wrap hl-grid">
+      <div class="info-card">
+        <h3><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Horario</h3>
+        <table class="hours">
+          <tr><td>Lunes – Viernes</td><td class="ph">[09:00 – 20:00]</td></tr>
+          <tr><td>Sábado</td><td class="ph">[Cerrado]</td></tr>
+          <tr><td>Domingo</td><td class="ph">[Cerrado]</td></tr>
+        </table>
+      </div>
+      <div class="map-art">
+        <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice"><path d="M-20 140c60-40 120-40 180 0s120 40 180 0 120-40 180 0v100H-20V140z" fill="var(--teal-100)" opacity="0.5"/><path d="M-20 170c60-35 120-35 180 0s120 35 180 0 120-35 180 0v70H-20v-70z" fill="var(--teal-300)" opacity="0.4"/></svg>
+        <div class="map-pin">
+          <svg class="pin-icon" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
+          <div class="addr ph">[Dirección de la clínica, Torrevieja]</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap contact-grid">
+      <div>
+        <p class="eyebrow">Contacto</p>
+        <h2>Escríbenos o reserva tu primera cita</h2>
+        <ul class="contact-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 6c0 8 6 14 14 14l1-4-5-2-2 2c-2-1-4-3-5-5l2-2-2-5-4 1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <div><div class="label">Teléfono</div><div class="value ph">[Teléfono de contacto]</div></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M4 6.5l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><div class="label">Email</div><div class="value"><a href="mailto:info@vitanordfisio.com">info@vitanordfisio.com</a></div></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
+            <div><div class="label">Dirección</div><div class="value ph">[Dirección de la clínica, Torrevieja]</div></div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <form class="contact-form" id="contactForm">
+          <div class="field-row">
+            <div class="field">
+              <label for="name">Nombre</label>
+              <input id="name" name="name" type="text" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="phone">Teléfono</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel">
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="message">Cuéntanos brevemente qué te ocurre</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit" style="align-self:flex-start;">Enviar solicitud</button>
+          <p class="form-note">Formulario de demostración: conéctalo a tu email o sistema de reservas antes de publicar la web.</p>
+          <p id="form-success" role="status">Gracias — hemos recibido tu solicitud y te contactaremos en breve.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a class="brand" href="#inicio" style="text-decoration:none;">
+          <svg class="brand-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="19" fill="#0e3733" stroke="rgba(217,233,229,0.35)"/>
+            <path d="M8 23c3-6 6-9 12-9s9 3 12 9" stroke="var(--teal-300)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M8 27c3-6 6-9 12-9s9 3 12 9" stroke="#fdfbf6" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          </svg>
+          <span class="brand-name">VitaNord Fisio</span>
+        </a>
+        <p class="tagline">Fisioterapia clínica en Torrevieja. Terapia manual, ejercicio guiado y seguimiento cercano en cada fase de tu recuperación.</p>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#nosotros">Sobre nosotros</a></li>
+          <li><a href="#testimonios">Testimonios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li class="ph" style="color:rgba(217,233,229,0.7);">[Teléfono]</li>
+          <li><a href="mailto:info@vitanordfisio.com" style="color:rgba(217,233,229,0.85);">info@vitanordfisio.com</a></li>
+          <li class="ph" style="color:rgba(217,233,229,0.7);">[Dirección, Torrevieja]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> VitaNord Fisio</span>
+      <span>Sitio de demostración — datos de contacto pendientes de completar</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var menuBtn = document.getElementById('menuToggle');
+  var mobileMenu = document.getElementById('mobileMenu');
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function () {
+      var open = mobileMenu.style.display === 'flex';
+      mobileMenu.style.display = open ? 'none' : 'flex';
+      menuBtn.setAttribute('aria-expanded', String(!open));
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        mobileMenu.style.display = 'none';
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  var form = document.getElementById('contactForm');
+  var success = document.getElementById('form-success');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      success.style.display = 'block';
+      form.reset();
+    });
+  }
+</script>
+</body>
+</html>
