@@ -26,37 +26,9 @@
     --placeholder-text: #6b4f22;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper: #0a1a2c;
-      --surface: #0f2440;
-      --surface-alt: #0c2036;
-      --text: #e8f3f5;
-      --text-muted: #a9c2cc;
-      --accent: #4fc9d6;
-      --accent-strong: #7fd9e3;
-      --hairline: rgba(232, 243, 245, 0.14);
-      --focus: #7fd9e3;
-      --placeholder-bg: #2a2013;
-      --placeholder-border: #b98a49;
-      --placeholder-text: #e6c793;
-    }
-  }
-
-  :root[data-theme="dark"] {
-    --paper: #0a1a2c;
-    --surface: #0f2440;
-    --surface-alt: #0c2036;
-    --text: #e8f3f5;
-    --text-muted: #a9c2cc;
-    --accent: #4fc9d6;
-    --accent-strong: #7fd9e3;
-    --hairline: rgba(232, 243, 245, 0.14);
-    --focus: #7fd9e3;
-    --placeholder-bg: #2a2013;
-    --placeholder-border: #b98a49;
-    --placeholder-text: #e6c793;
-  }
+  /* The site always uses the light palette above, regardless of the visitor's
+     device dark-mode setting — VitaNord Fisio wants a consistently light,
+     white/clinical look rather than switching to a dark theme. */
 
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -301,9 +273,24 @@
   .service-card p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
 
   /* ---------- Approach ---------- */
+  .approach-layout {
+    display: grid;
+    grid-template-columns: 1.3fr 0.8fr;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .approach-photo {
+    border-radius: 6px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    box-shadow: 0 1px 2px rgba(11, 46, 87, 0.05), 0 20px 40px -28px rgba(11, 46, 87, 0.35);
+  }
+  .approach-photo img { width: 100%; height: 100%; object-fit: cover; display: block; object-position: center 25%; }
+
   .approach-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
     gap: clamp(1.5rem, 3vw, 2.5rem);
   }
 
@@ -531,23 +518,24 @@
 
   /* ---------- Footer ---------- */
   footer.site {
-    background: var(--pine-900);
-    color: #d9e9e5;
+    background: var(--surface-alt);
+    color: var(--text-muted);
+    border-top: 1px solid var(--hairline);
     padding: clamp(3rem, 6vw, 4rem) 0 1.75rem;
   }
-  footer.site .brand-name { color: #fdfbf6; }
+  footer.site .brand-name { color: var(--text); }
   footer.site .footer-top {
     display: grid;
     grid-template-columns: 1.4fr 1fr 1fr;
     gap: 2.5rem;
     padding-bottom: 2.5rem;
-    border-bottom: 1px solid rgba(217,233,229,0.18);
+    border-bottom: 1px solid var(--hairline);
   }
-  footer.site .tagline { color: rgba(217,233,229,0.75); font-size: 0.95rem; max-width: 32ch; margin-top: 0.9rem; }
-  footer.site h4 { font-family: 'Karla', sans-serif; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(217,233,229,0.55); margin-bottom: 1rem; }
+  footer.site .tagline { color: var(--text-muted); font-size: 0.95rem; max-width: 32ch; margin-top: 0.9rem; }
+  footer.site h4 { font-family: 'Karla', sans-serif; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
   footer.site ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.65rem; }
-  footer.site a { text-decoration: none; color: rgba(217,233,229,0.85); font-size: 0.94rem; }
-  footer.site a:hover { color: #fdfbf6; }
+  footer.site a { text-decoration: none; color: var(--text-muted); font-size: 0.94rem; }
+  footer.site a:hover { color: var(--accent); }
   .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -556,7 +544,7 @@
     gap: 1rem;
     padding-top: 1.5rem;
     font-size: 0.85rem;
-    color: rgba(217,233,229,0.55);
+    color: var(--text-muted);
   }
 
   /* ---------- Responsive ---------- */
@@ -573,7 +561,8 @@
     }
     .hero-grid { grid-template-columns: 1fr; }
     .hero-art { order: -1; max-width: 380px; margin: 0 auto; }
-    .about-grid, .hl-grid, .contact-grid { grid-template-columns: 1fr; }
+    .about-grid, .hl-grid, .contact-grid, .approach-layout { grid-template-columns: 1fr; }
+    .approach-photo { order: -1; max-width: 420px; margin: 0 auto; }
     footer.site .footer-top { grid-template-columns: 1fr; }
     .field-row { grid-template-columns: 1fr; }
   }
