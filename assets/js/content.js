@@ -792,7 +792,7 @@ window.VN_CONTENT = {
       }
     },
     {
-      slug: 'home-visit', icon: 'home', published: true, duration: 60,
+      slug: 'home-visit', icon: 'home', published: true, duration: 40,
       en: {
         title: 'Home visit',
         summary: 'The same treatment in your own home, when getting to the clinic is the hard part.',
@@ -921,11 +921,17 @@ window.VN_CONTENT = {
       /* credentials can be one string for every language, or an object with a
          string per language when the wording should be translated. */
       credentials: [{
-        en: 'MSc in neuro-musculoskeletal pain management',
-        no: 'Master i håndtering av nevromuskuloskeletal smerte',
-        sv: 'Master i hantering av neuromuskuloskeletal smärta',
-        fi: 'Maisteri neuromuskuloskeletaalisen kivun hoidossa',
-        es: 'Máster en el manejo del dolor neuro-músculo-esquelético'
+        en: 'BSc in Physiotherapy, Universidad Nacional de Colombia',
+        no: 'Bachelor i fysioterapi, Universidad Nacional de Colombia',
+        sv: 'Kandidatexamen i fysioterapi, Universidad Nacional de Colombia',
+        fi: 'Fysioterapian kandidaatti, Universidad Nacional de Colombia',
+        es: 'Fisioterapeuta, Universidad Nacional de Colombia'
+      }, {
+        en: 'MSc in neuro-musculoskeletal pain management, Universidad Miguel Hernández',
+        no: 'Master i håndtering av nevromuskuloskeletal smerte, Universidad Miguel Hernández',
+        sv: 'Master i hantering av neuromuskuloskeletal smärta, Universidad Miguel Hernández',
+        fi: 'Maisteri neuromuskuloskeletaalisen kivun hoidossa, Universidad Miguel Hernández',
+        es: 'Máster en el manejo del dolor neuro-músculo-esquelético, Universidad Miguel Hernández'
       }],
       registration: {
         en: 'Colegio de Fisioterapeutas, registration no. 10084',
@@ -935,11 +941,11 @@ window.VN_CONTENT = {
         es: 'Colegiado nº 10084 del Colegio de Fisioterapeutas'
       },
       languages: ['en', 'es'],
-      en: { role: 'Physiotherapist', bio: 'Profile text to be added. This space is ready for a short introduction: background, areas of special interest and what patients can expect from a session.' },
-      no: { role: 'Fysioterapeut',   bio: 'Profiltekst kommer. Her er det satt av plass til en kort presentasjon: bakgrunn, spesielle interesseområder og hva pasienter kan forvente av en time.' },
-      sv: { role: 'Fysioterapeut',   bio: 'Profiltext kommer. Här finns plats för en kort presentation: bakgrund, särskilda intresseområden och vad patienter kan förvänta sig av ett besök.' },
-      fi: { role: 'Fysioterapeutti', bio: 'Esittelyteksti tulossa. Tähän tulee lyhyt esittely: tausta, erityiset kiinnostuksen kohteet ja mitä potilas voi käynniltä odottaa.' },
-      es: { role: 'Fisioterapeuta',  bio: 'Texto de perfil pendiente. Este espacio está listo para una breve presentación: formación, áreas de especial interés y qué puede esperar el paciente de una sesión.' }
+      en: { role: 'Physiotherapist', bio: 'I believe good physiotherapy starts with listening — understanding the person behind the symptoms and designing a treatment that truly fits their needs. My approach is personalised, practical and focused on helping you reduce pain, regain movement and improve your function and confidence in everyday life. I combine manual therapy with active rehabilitation, adapting each process to each patient’s characteristics and goals.' },
+      no: { role: 'Fysioterapeut',   bio: 'Jeg mener at god fysioterapi begynner med å lytte — å forstå personen bak symptomene og utforme en behandling som virkelig passer til deres behov. Min tilnærming er personlig, praktisk og rettet mot å hjelpe deg med å redusere smerte, gjenvinne bevegelse og forbedre funksjon og trygghet i hverdagen. Jeg kombinerer manuell behandling med aktiv rehabilitering, og tilpasser hver prosess til den enkelte pasients egenskaper og mål.' },
+      sv: { role: 'Fysioterapeut',   bio: 'Jag tror att bra fysioterapi börjar med att lyssna — att förstå personen bakom symtomen och utforma en behandling som verkligen passar just dina behov. Mitt förhållningssätt är personligt, praktiskt och inriktat på att hjälpa dig minska smärta, återfå rörlighet och förbättra din funktion och trygghet i vardagen. Jag kombinerar manuell behandling med aktiv rehabilitering och anpassar varje process efter varje patients egenskaper och mål.' },
+      fi: { role: 'Fysioterapeutti', bio: 'Uskon, että hyvä fysioterapia alkaa kuuntelemisesta — oireiden takana olevan ihmisen ymmärtämisestä ja hoidon suunnittelusta, joka todella vastaa hänen tarpeitaan. Lähestymistapani on yksilöllinen, käytännönläheinen ja tähtää kivun vähentämiseen, liikkuvuuden palauttamiseen sekä toimintakyvyn ja itseluottamuksen parantamiseen arjessa. Yhdistän manuaalisen hoidon aktiiviseen kuntoutukseen ja sovitan jokaisen prosessin potilaan ominaisuuksiin ja tavoitteisiin.' },
+      es: { role: 'Fisioterapeuta',  bio: 'Creo que una buena fisioterapia comienza por escuchar, comprender a la persona que hay detrás de los síntomas y diseñar un tratamiento que realmente se adapte a sus necesidades. Mi enfoque es personalizado, práctico y orientado a ayudarte a reducir el dolor, recuperar el movimiento y mejorar tu función y confianza en el día a día. Combino el tratamiento manual con la rehabilitación activa, adaptando cada proceso a las características y objetivos de cada paciente.' }
     },
     {
       id: 'sara',
@@ -970,12 +976,12 @@ window.VN_CONTENT = {
       fi: { title: 'Fysioterapiakäynti', note: 'Yksilöllinen hoitokäynti fysioterapeutin kanssa.' },
       es: { title: 'Sesión de fisioterapia', note: 'Una sesión de tratamiento individual con tu fisioterapeuta.' } },
 
-    { id: 'package5', price: '−5%', duration: null, featured: false,
-      en: { title: 'Package of 5 sessions', note: 'Five sessions booked together, 5% off. €237.50 instead of €250.' },
-      no: { title: 'Pakke med 5 timer', note: 'Fem timer bestilt samlet, 5 % rabatt. 237,50 € i stedet for 250 €.' },
-      sv: { title: 'Paket med 5 besök', note: 'Fem besök bokade tillsammans, 5 % rabatt. 237,50 € i stället för 250 €.' },
-      fi: { title: 'Viiden käynnin paketti', note: 'Viisi käyntiä kerralla varattuna, 5 %:n alennus. 237,50 € hinnan 250 € sijaan.' },
-      es: { title: 'Bono de 5 sesiones', note: 'Cinco sesiones reservadas juntas, 5 % de descuento. 237,50 € en lugar de 250 €.' } },
+    { id: 'package5', price: '€230', duration: null, featured: false,
+      en: { title: 'Package of 5 sessions', note: 'Five sessions booked together for €230, instead of €250.' },
+      no: { title: 'Pakke med 5 timer', note: 'Fem timer bestilt samlet for 230 €, i stedet for 250 €.' },
+      sv: { title: 'Paket med 5 besök', note: 'Fem besök bokade tillsammans för 230 €, i stället för 250 €.' },
+      fi: { title: 'Viiden käynnin paketti', note: 'Viisi käyntiä kerralla varattuna hintaan 230 €, hinnan 250 € sijaan.' },
+      es: { title: 'Bono de 5 sesiones', note: 'Cinco sesiones reservadas juntas por 230 €, en lugar de 250 €.' } },
 
     { id: 'package10', price: '−10%', duration: null, featured: false,
       en: { title: 'Package of 10 sessions', note: 'Ten sessions booked together, 10% off. €450 instead of €500.' },
@@ -984,7 +990,7 @@ window.VN_CONTENT = {
       fi: { title: 'Kymmenen käynnin paketti', note: 'Kymmenen käyntiä kerralla varattuna, 10 %:n alennus. 450 € hinnan 500 € sijaan.' },
       es: { title: 'Bono de 10 sesiones', note: 'Diez sesiones reservadas juntas, 10 % de descuento. 450 € en lugar de 500 €.' } },
 
-    { id: 'home',     price: '€60', duration: 60, featured: false,
+    { id: 'home',     price: '€60', duration: 40, featured: false,
       en: { title: 'Home visit', note: 'Treatment at your home in the Torrevieja area, subject to availability.' },
       no: { title: 'Hjemmebesøk', note: 'Behandling hjemme hos deg i Torrevieja-området, ved ledig kapasitet.' },
       sv: { title: 'Hembesök', note: 'Behandling hemma hos dig i Torrevieja-området, i mån av tid.' },
