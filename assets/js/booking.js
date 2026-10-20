@@ -36,11 +36,8 @@
     prev: root.querySelector('[data-bk-prev]'),
     next: root.querySelector('[data-bk-next]'),
     form: root.querySelector('[data-bk-form]'),
-    result: root.querySelector('[data-bk-result]'),
-    demoNotice: root.querySelector('[data-demo-notice]')
+    result: root.querySelector('[data-bk-result]')
   };
-
-  if (els.demoNotice) els.demoNotice.hidden = !P.isDemo;
 
   /* ------------------------------------------------------------- helpers -- */
   function fmtDate(isoStr, opts) {

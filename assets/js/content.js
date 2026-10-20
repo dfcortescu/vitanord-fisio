@@ -950,16 +950,40 @@ window.VN_CONTENT = {
     {
       id: 'sara',
       name: 'Sara Acs',
-      published: false,                 // Sara is undecided, flip to true when she joins
-      photo: null,
-      credentials: ['[Degree / qualification to be added]'],
-      registration: '[Colegio de Fisioterapeutas no. to be added]',
-      languages: ['en', 'es', 'hu'],
-      en: { role: 'Physiotherapist', bio: 'Profile text to be added. This space is ready for a short introduction: background, areas of special interest and what patients can expect from a session.' },
-      no: { role: 'Fysioterapeut',   bio: 'Profiltekst kommer. Her er det satt av plass til en kort presentasjon: bakgrunn, spesielle interesseområder og hva pasienter kan forvente av en time.' },
-      sv: { role: 'Fysioterapeut',   bio: 'Profiltext kommer. Här finns plats för en kort presentation: bakgrund, särskilda intresseområden och vad patienter kan förvänta sig av ett besök.' },
-      fi: { role: 'Fysioterapeutti', bio: 'Esittelyteksti tulossa. Tähän tulee lyhyt esittely: tausta, erityiset kiinnostuksen kohteet ja mitä potilas voi käynniltä odottaa.' },
-      es: { role: 'Fisioterapeuta',  bio: 'Texto de perfil pendiente. Este espacio está listo para una breve presentación: formación, áreas de especial interés y qué puede esperar el paciente de una sesión.' }
+      published: true,
+      photo: 'team/sara.jpg',
+      credentials: [{
+        en: 'BSc in Physiotherapy, Universidad Miguel Hernández',
+        no: 'Bachelor i fysioterapi, Universidad Miguel Hernández',
+        sv: 'Kandidatexamen i fysioterapi, Universidad Miguel Hernández',
+        fi: 'Fysioterapian kandidaatti, Universidad Miguel Hernández',
+        es: 'Fisioterapeuta, Universidad Miguel Hernández'
+      }, {
+        en: 'MSc in neuro-musculoskeletal pain management, Universidad Miguel Hernández',
+        no: 'Master i håndtering av nevromuskuloskeletal smerte, Universidad Miguel Hernández',
+        sv: 'Master i hantering av neuromuskuloskeletal smärta, Universidad Miguel Hernández',
+        fi: 'Maisteri neuromuskuloskeletaalisen kivun hoidossa, Universidad Miguel Hernández',
+        es: 'Máster en el manejo del dolor neuro-músculo-esquelético, Universidad Miguel Hernández'
+      }, {
+        en: 'MSc in Sports Performance and Health, Universidad Miguel Hernández',
+        no: 'Master i idrettsprestasjon og helse, Universidad Miguel Hernández',
+        sv: 'Master i idrottsprestation och hälsa, Universidad Miguel Hernández',
+        fi: 'Maisteri urheilusuorituskyvyssä ja terveydessä, Universidad Miguel Hernández',
+        es: 'Máster en Rendimiento Deportivo y Salud, Universidad Miguel Hernández'
+      }],
+      registration: {
+        en: 'Colegio de Fisioterapeutas, registration no. 8828',
+        no: 'Colegio de Fisioterapeutas, reg.nr. 8828',
+        sv: 'Colegio de Fisioterapeutas, reg.nr 8828',
+        fi: 'Colegio de Fisioterapeutas, rek.nro 8828',
+        es: 'Colegiada nº 8828 del Colegio de Fisioterapeutas'
+      },
+      languages: ['es', 'en', 'hu'],
+      en: { role: 'Physiotherapist', bio: 'I like to combine recovery with performance: helping patients not only ease their pain, but rebuild the strength, mobility and confidence to get back to their normal activity or sport. My postgraduate training in neuro-musculoskeletal pain management and in sports performance and health lets me design treatment that works just as well for someone recovering from an injury as for someone looking to improve how their body performs. I work closely with each patient, in several languages, adapting the approach to what they actually need.' },
+      no: { role: 'Fysioterapeut',   bio: 'Jeg liker å kombinere restitusjon med prestasjon: jeg hjelper pasienter ikke bare med å redusere smerte, men også med å gjenvinne styrke, bevegelighet og trygghet til å komme tilbake til vanlig aktivitet eller idrett. Min videreutdanning innen håndtering av nevromuskuloskeletal smerte og idrettsprestasjon og helse gjør at jeg kan utforme behandling som passer like godt for noen som kommer seg etter en skade, som for noen som ønsker å forbedre fysisk prestasjon. Jeg jobber tett med hver enkelt pasient, på flere språk, og tilpasser meg det de faktisk trenger.' },
+      sv: { role: 'Fysioterapeut',   bio: 'Jag gillar att kombinera återhämtning med prestation: jag hjälper patienter inte bara att lindra smärta, utan också att återfå styrka, rörlighet och trygghet för att komma tillbaka till vanlig aktivitet eller idrott. Min vidareutbildning inom hantering av neuromuskuloskeletal smärta samt idrottsprestation och hälsa gör att jag kan utforma behandlingar som passar lika bra för den som återhämtar sig från en skada som för den som vill förbättra sin fysiska prestation. Jag arbetar nära varje patient, på flera språk, och anpassar mig efter vad de faktiskt behöver.' },
+      fi: { role: 'Fysioterapeutti', bio: 'Pidän siitä, että yhdistän kuntoutumisen ja suorituskyvyn: autan potilaita paitsi lievittämään kipua myös palauttamaan voimaa, liikkuvuutta ja itseluottamusta palatakseen tavalliseen arkeen tai urheiluun. Jatkokoulutukseni neuromuskuloskeletaalisen kivun hoidossa sekä urheilusuorituskyvyssä ja terveydessä antaa minulle valmiudet suunnitella hoitoa, joka sopii yhtä hyvin vammasta toipuvalle kuin fyysistä suorituskykyään parantamaan pyrkivälle. Teen työtä tiiviisti jokaisen potilaan kanssa, useilla kielillä, ja mukautan lähestymistapani heidän todellisiin tarpeisiinsa.' },
+      es: { role: 'Fisioterapeuta',  bio: 'Me gusta combinar la recuperación con el rendimiento: ayudo a mis pacientes no solo a aliviar el dolor, sino a recuperar fuerza, movilidad y confianza para volver a su actividad física o deportiva habitual. Mi formación de posgrado en el manejo del dolor neuro-músculo-esquelético y en rendimiento deportivo y salud me permite diseñar tratamientos que funcionan igual de bien para quien se recupera de una lesión que para quien busca mejorar su rendimiento físico. Trabajo de forma cercana con cada paciente, en varios idiomas, adaptándome a lo que realmente necesita.' }
     }
   ],
 

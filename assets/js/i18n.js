@@ -188,7 +188,6 @@ en: {
   'booking.success.again': 'Book another appointment',
   'booking.error.title': 'Something went wrong',
   'booking.error.text': 'The booking could not be completed. Please try again, or contact us directly and we will book it for you.',
-  'booking.demoNotice': 'Demo mode: appointment times shown are examples. Connect a booking provider to go live.',
   'booking.addCalendar': 'Add to calendar',
 
   'contact.kicker': 'Contact',
@@ -424,7 +423,6 @@ no: {
   'booking.success.again': 'Bestill en time til',
   'booking.error.title': 'Noe gikk galt',
   'booking.error.text': 'Bestillingen kunne ikke fullføres. Prøv igjen, eller kontakt oss direkte så bestiller vi for deg.',
-  'booking.demoNotice': 'Demomodus: tidene som vises er eksempler. Koble til en bookingleverandør for å gå live.',
   'booking.addCalendar': 'Legg i kalender',
 
   'contact.kicker': 'Kontakt',
@@ -660,7 +658,6 @@ sv: {
   'booking.success.again': 'Boka en tid till',
   'booking.error.title': 'Något gick fel',
   'booking.error.text': 'Bokningen kunde inte slutföras. Försök igen, eller kontakta oss direkt så bokar vi åt dig.',
-  'booking.demoNotice': 'Demoläge: tiderna som visas är exempel. Anslut ett bokningssystem för att gå live.',
   'booking.addCalendar': 'Lägg till i kalender',
 
   'contact.kicker': 'Kontakt',
@@ -896,7 +893,6 @@ fi: {
   'booking.success.again': 'Varaa toinen aika',
   'booking.error.title': 'Jokin meni pieleen',
   'booking.error.text': 'Varausta ei voitu tehdä. Yritä uudelleen tai ota suoraan yhteyttä, niin varaamme ajan puolestasi.',
-  'booking.demoNotice': 'Demotila: näytetyt ajat ovat esimerkkejä. Yhdistä ajanvarausjärjestelmä ottaaksesi käyttöön.',
   'booking.addCalendar': 'Lisää kalenteriin',
 
   'contact.kicker': 'Yhteystiedot',
@@ -1132,7 +1128,6 @@ es: {
   'booking.success.again': 'Pedir otra cita',
   'booking.error.title': 'Algo ha fallado',
   'booking.error.text': 'No se ha podido completar la reserva. Inténtalo de nuevo o contáctanos directamente y la hacemos por ti.',
-  'booking.demoNotice': 'Modo demostración: las horas mostradas son de ejemplo. Conecta un sistema de reservas para activarlo.',
   'booking.addCalendar': 'Añadir al calendario',
 
   'contact.kicker': 'Contacto',
