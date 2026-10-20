@@ -594,9 +594,19 @@
   }
 
   /* ------------------------------------------------------- contact form -- */
+  /* EmailJS sends this form straight to our inbox, no backend needed.
+     Service/template live in the EmailJS dashboard (emailjs.com). */
+  var EMAILJS_PUBLIC_KEY = '14Cweuv4w0T1ffkPZ';
+  var EMAILJS_SERVICE_ID = 'service_utvcclt';
+  var EMAILJS_TEMPLATE_ID = 'template_nw52y2h';
+
   function initContactForm() {
     var form = document.querySelector('[data-contact-form]');
     if (!form) return;
+
+    if (window.emailjs && EMAILJS_PUBLIC_KEY) {
+      try { window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); } catch (e) {}
+    }
 
     /* Home visits are arranged by hand rather than through the booking
        wizard: the home-visit treatment page and price card link here with
@@ -612,8 +622,12 @@
       if (form.querySelector('.honey') && form.querySelector('.honey').value) return; // bot
       var ok = true;
       form.querySelectorAll('[required]').forEach(function (f) {
-        var bad = !f.value.trim() || (f.type === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(f.value));
-        f.closest('.field').classList.toggle('has-error', bad);
+        var v = (f.type === 'checkbox') ? f.checked : f.value.trim();
+        var bad = !v;
+        if (!bad && f.type === 'email') bad = !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(f.value);
+        var wrap = f.closest('.field') || f.closest('.check');
+        if (wrap) wrap.classList.toggle('has-error', bad);
+        if (bad && ok) { try { f.focus(); } catch (err) {} }
         if (bad) ok = false;
       });
       var box = form.querySelector('[data-form-msg]');
@@ -622,22 +636,36 @@
       btn.disabled = true;
       var old = btn.textContent;
       btn.textContent = t('contact.form.sending');
-      /* ------------------------------------------------------------------
-         CONNECT YOUR BACKEND HERE.
-         Replace this timeout with a fetch() to your form endpoint, e.g.
-         Formspree, Netlify Forms, EmailJS or your own /api/contact.
-         ------------------------------------------------------------------ */
-      setTimeout(function () {
+
+      function showResult(success) {
         btn.disabled = false; btn.textContent = old;
-        box.className = 'alert alert-ok';
-        box.textContent = t('contact.form.sent');
+        box.className = success ? 'alert alert-ok' : 'alert alert-bad';
+        box.textContent = t(success ? 'contact.form.sent' : 'contact.form.failed');
         box.hidden = false;
-        form.reset();
+        if (success) form.reset();
         box.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
-      }, 750);
+      }
+
+      if (!window.emailjs) { showResult(false); return; }
+
+      var params = {
+        name: form.elements['name'].value.trim(),
+        email: form.elements['email'].value.trim(),
+        phone: form.elements['phone'] ? form.elements['phone'].value.trim() : '',
+        subject: form.elements['subject'] ? form.elements['subject'].value.trim() : '',
+        message: form.elements['message'].value.trim()
+      };
+
+      window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params).then(
+        function () { showResult(true); },
+        function () { showResult(false); }
+      );
     });
     form.querySelectorAll('input,textarea').forEach(function (f) {
-      f.addEventListener('input', function () { f.closest('.field').classList.remove('has-error'); });
+      f.addEventListener('input', function () {
+        var wrap = f.closest('.field') || f.closest('.check');
+        if (wrap) wrap.classList.remove('has-error');
+      });
     });
   }
 

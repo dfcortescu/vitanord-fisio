@@ -528,6 +528,8 @@ a.card:hover h3{color:var(--teal-700)}
 
 .check{display:flex;gap:12px;align-items:flex-start;margin-bottom:20px;cursor:pointer;font-size:.88rem;line-height:1.5}
 .check input{flex:none;width:20px;height:20px;margin-top:1px;accent-color:var(--teal);cursor:pointer}
+.check.has-error{color:#C2483D}
+.check.has-error input{outline:2px solid #D2564B;outline-offset:2px;border-radius:4px}
 .honey{position:absolute!important;left:-9999px;opacity:0;height:0;width:0}
 
 /* summary + confirmation */
