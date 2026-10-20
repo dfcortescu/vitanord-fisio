@@ -58,18 +58,14 @@
   var STEP_LABELS = { 1: 'booking.step1', 2: 'booking.step2', 3: 'booking.step3',
                       4: 'booking.step4', 5: 'booking.step5' };
 
-  /* With a single therapist there is nothing to choose, so step 2 is dropped
-     from the flow and from the progress bar rather than shown as a dead end. */
-  function soloTherapist() { return state.therapists.length === 1; }
-  function visibleSteps() { return soloTherapist() ? [1, 3, 4, 5] : [1, 2, 3, 4, 5]; }
+  /* Patients don't pick a therapist — the clinic assigns whoever is
+     available, so the "who would you like to see" step is always
+     dropped from the flow and from the progress bar. */
+  function visibleSteps() { return [1, 3, 4, 5]; }
 
-  function autoPickTherapist() {
-    var only = state.therapists[0];
-    if (!only) return;
-    state.therapistId = only.id;
-    state.therapistName = only.name;
-    var b = els.optTherapist.querySelector('[data-therapist="' + CSS.escape(only.id) + '"]');
-    if (b) select(els.optTherapist, b);
+  function assignAnyTherapist() {
+    state.therapistId = 'any';
+    state.therapistName = t('booking.anyTherapist');
   }
 
   function buildProgress() {
@@ -339,8 +335,9 @@
     if (!canAdvance()) return;
     if (state.step === 1) {
       loadTherapists().then(function () {
-        if (soloTherapist()) { autoPickTherapist(); loadDays(); show(3); }
-        else { show(2); }
+        assignAnyTherapist();
+        loadDays();
+        show(3);
       });
       return;
     }
@@ -394,23 +391,14 @@
     buildProgress();
     var q = new URLSearchParams(location.search);
     var pre = q.get('treatment') || q.get('service');
-    var preT = q.get('therapist');
 
     if (pre) {
       var sb = els.optService.querySelector('[data-service="' + CSS.escape(pre) + '"]');
       if (sb) sb.click();
     }
-    if (preT) {
-      var tb = els.optTherapist.querySelector('[data-therapist="' + CSS.escape(preT) + '"]');
-      if (tb) tb.click();
-    }
 
-    if (state.serviceId && soloTherapist()) {
-      autoPickTherapist(); loadDays(); show(3);
-    } else if (state.serviceId && preT) {
-      loadDays(); show(3);
-    } else if (state.serviceId) {
-      show(2);
+    if (state.serviceId) {
+      assignAnyTherapist(); loadDays(); show(3);
     } else {
       updateNav();
     }

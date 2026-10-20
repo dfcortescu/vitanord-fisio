@@ -227,8 +227,8 @@
         '<div class="team-tags">' + creds + regs + '</div>' +
         '<p class="small muted" style="margin:6px 0 4px" data-i18n="about.team.languages">' + esc(t('about.team.languages')) + '</p>' +
         '<div class="team-tags">' + langs + '</div>' +
-        '<a class="btn btn-outline btn-sm" href="' + rel('booking.html') + '?therapist=' + p.id + '">' +
-        '<span><span data-i18n="about.team.bookWith">' + esc(t('about.team.bookWith')) + '</span> ' + esc(p.name.split(' ')[0]) + '</span></a>' +
+        '<a class="btn btn-outline btn-sm" href="' + rel('booking.html') + '">' +
+        '<span data-i18n="cta.bookShort">' + esc(t('cta.bookShort')) + '</span></a>' +
         '</article>';
     }).join('');
   }
