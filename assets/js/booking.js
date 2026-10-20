@@ -365,11 +365,28 @@
     });
   });
 
-  /* Re-render the wizard when the visitor switches language mid-booking. */
+  /* Re-render the wizard when the visitor switches language mid-booking.
+     This also fires once on first page load (app.js dispatches it right
+     after setting the initial language), which can land after a deep-link
+     preselection in the init block below has already clicked an option —
+     re-applying the current selection here keeps that choice visible
+     instead of it silently reverting to "none selected". */
   document.addEventListener('vn:lang', function () {
     buildProgress();
-    if (state.step === 1) loadServices();
-    if (state.step === 2) loadTherapists();
+    if (state.step === 1) {
+      loadServices().then(function () {
+        if (!state.serviceId) return;
+        var sb = els.optService.querySelector('[data-service="' + CSS.escape(state.serviceId) + '"]');
+        if (sb) select(els.optService, sb);
+      });
+    }
+    if (state.step === 2) {
+      loadTherapists().then(function () {
+        if (!state.therapistId) return;
+        var tb = els.optTherapist.querySelector('[data-therapist="' + CSS.escape(state.therapistId) + '"]');
+        if (tb) select(els.optTherapist, tb);
+      });
+    }
     if (state.step === 3 && state.date) loadSlots();
     if (state.step === 5) buildSummary();
   });

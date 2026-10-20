@@ -969,7 +969,7 @@ window.VN_CONTENT = {
      of sessions, less the discount. If you change the session price, update
      those two notes as well.                                              */
   prices: [
-    { id: 'session',  price: '€50', duration: 45, featured: true,
+    { id: 'session',  price: '€50', duration: 45, featured: true, icon: 'hands',
       en: { title: 'Physiotherapy session', note: 'A one-to-one treatment session with your physiotherapist.' },
       no: { title: 'Fysioterapitime', note: 'En behandlingstime alene med fysioterapeuten din.' },
       sv: { title: 'Fysioterapibesök', note: 'Ett behandlingsbesök enskilt med din fysioterapeut.' },
@@ -990,7 +990,7 @@ window.VN_CONTENT = {
       fi: { title: 'Kymmenen käynnin paketti', note: 'Kymmenen käyntiä kerralla varattuna, 10 %:n alennus. 450 € hinnan 500 € sijaan.' },
       es: { title: 'Bono de 10 sesiones', note: 'Diez sesiones reservadas juntas, 10 % de descuento. 450 € en lugar de 500 €.' } },
 
-    { id: 'home',     price: '€60', duration: 40, featured: false,
+    { id: 'home',     price: '€60', duration: 40, featured: false, icon: 'home',
       en: { title: 'Home visit', note: 'Treatment at your home in the Torrevieja area, subject to availability.' },
       no: { title: 'Hjemmebesøk', note: 'Behandling hjemme hos deg i Torrevieja-området, ved ledig kapasitet.' },
       sv: { title: 'Hembesök', note: 'Behandling hemma hos dig i Torrevieja-området, i mån av tid.' },
