@@ -234,7 +234,12 @@
   }
 
   function renderPrices(host) {
+    /* Home visits aren't booked through the online wizard — they're arranged
+       by hand, so that one card sends patients to the contact form instead. */
     host.innerHTML = C.prices.map(function (p) {
+      var isHome = p.id === 'home';
+      var ctaHref = isHome ? rel('contact.html') + '?subject=home-visit' : rel('booking.html');
+      var ctaKey = isHome ? 'cta.contact' : 'prices.book';
       return '<article class="card price-card' + (p.featured ? ' is-featured' : '') + '">' +
         '<span class="badge-slot">' +
           (p.featured ? '<span class="badge" data-i18n="prices.popular">' + esc(t('prices.popular')) + '</span>' : '') +
@@ -242,7 +247,7 @@
         '<h3 data-c="prices.' + p.id + '.title">' + esc(L(p).title) + '</h3>' +
         '<p class="amount">' + esc(p.price) + (p.duration ? '<small>/ ' + p.duration + ' <span data-i18n="prices.duration">' + esc(t('prices.duration')) + '</span></small>' : '') + '</p>' +
         '<p data-c="prices.' + p.id + '.note">' + esc(L(p).note) + '</p>' +
-        '<a class="btn btn-primary btn-sm btn-block" href="' + rel('booking.html') + '"><span data-i18n="prices.book">' + esc(t('prices.book')) + '</span>' + window.vnIcon('arrow', 'arrow') + '</a>' +
+        '<a class="btn btn-primary btn-sm btn-block" href="' + ctaHref + '"><span data-i18n="' + ctaKey + '">' + esc(t(ctaKey)) + '</span>' + window.vnIcon('arrow', 'arrow') + '</a>' +
         '</article>';
     }).join('');
   }
@@ -592,6 +597,16 @@
   function initContactForm() {
     var form = document.querySelector('[data-contact-form]');
     if (!form) return;
+
+    /* Home visits are arranged by hand rather than through the booking
+       wizard: the home-visit treatment page and price card link here with
+       ?subject=home-visit so the subject field arrives pre-filled. */
+    var presetSubject = new URLSearchParams(location.search).get('subject');
+    if (presetSubject === 'home-visit') {
+      var subjEl = form.querySelector('[name="subject"]');
+      if (subjEl && !subjEl.value) subjEl.value = contentAt('treatments.home-visit.title');
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (form.querySelector('.honey') && form.querySelector('.honey').value) return; // bot

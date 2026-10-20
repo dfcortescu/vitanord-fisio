@@ -102,17 +102,16 @@ window.VN_BOOKING_CONFIG = {
     id: 'mock',
     isDemo: true,
 
-    /* Patients book a session (in-clinic or at home), not a specific
-       treatment — what actually gets done is decided by the therapist
-       after assessing the patient in that session. So this list comes
-       from C.prices (the two bookable session formats), not from the
-       8 clinical treatment pages. The 'home' price id is exposed as
-       'home-visit' so the Book button on the home-visit treatment page
-       (?treatment=home-visit) still preselects it correctly. */
+    /* Patients book an in-clinic physiotherapy session here — what actually
+       gets done is decided by the therapist after assessing the patient in
+       that session, not pre-selected by the patient. Home visits are NOT
+       offered through this online wizard: they're arranged by hand, so the
+       home-visit treatment page and price card send patients to the
+       contact form instead of here (see contact.html / treatments/home-visit.html). */
     getServices: function () {
-      return delay(120, C.prices.filter(function (p) { return p.duration; })
+      return delay(120, C.prices.filter(function (p) { return p.duration && p.id !== 'home'; })
         .map(function (p) {
-          return { id: p.id === 'home' ? 'home-visit' : p.id, title: loc(p).title, duration: p.duration, icon: p.icon };
+          return { id: p.id, title: loc(p).title, duration: p.duration, icon: p.icon };
         }));
     },
 
