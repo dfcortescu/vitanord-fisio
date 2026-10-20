@@ -26,8 +26,15 @@
 
 window.VN_BOOKING_CONFIG = {
 
-  /* 'mock' | 'restApi' | 'calendly' | 'googleCalendar' | 'outlook' */
-  provider: 'mock',
+  /* 'mock' | 'calcom' | 'restApi' | 'calendly' | 'googleCalendar' | 'outlook' */
+  provider: 'calcom',
+
+  /* Cal.com — live. The patient picks the session on this site, then is
+     sent to this scheduling link to choose the real date/time and leave
+     their name, email and phone, which Cal.com collects itself. */
+  calcom: {
+    baseUrl: 'https://cal.com/vitanord-fysio-clinic-tc2jev/sesion'   // EDIT ME
+  },
 
   /* Your own backend (recommended: it keeps patient data under your control
      and lets the server talk to Google/Outlook with a private key). */
@@ -236,6 +243,33 @@ window.VN_BOOKING_CONFIG = {
     },
     createBooking: function (payload) {
       window.open(this.schedulingUrl(payload), '_blank', 'noopener');
+      return Promise.resolve({ ok: true, reference: '-', handoff: true });
+    }
+  };
+
+  /* ============================== CAL.COM ================================
+     Live for VitaNord. The patient picks the session on this site (step 1),
+     then is sent to the Cal.com link below to choose the real date and
+     time and leave their name, email and phone — Cal.com collects those
+     itself, so this site's own date/time and details steps are skipped
+     for this provider (see the `handoff` flag, used by booking.js). */
+  Providers.calcom = {
+    id: 'calcom',
+    isDemo: false,
+    handoff: true,                       // booking.js switches to hand-off mode
+    getServices: function () { return Providers.mock.getServices(); },
+    getTherapists: function () { return Providers.mock.getTherapists(); },
+    getDays: function () { return Promise.resolve([]); },
+    getSlots: function () { return Promise.resolve([]); },
+    schedulingUrl: function (o) {
+      o = o || {};
+      var params = [];
+      if (o.name) params.push('name=' + encodeURIComponent(o.name));
+      if (o.email) params.push('email=' + encodeURIComponent(o.email));
+      return CFG.calcom.baseUrl + (params.length ? '?' + params.join('&') : '');
+    },
+    createBooking: function (payload) {
+      window.location.href = this.schedulingUrl(payload);
       return Promise.resolve({ ok: true, reference: '-', handoff: true });
     }
   };

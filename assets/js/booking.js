@@ -36,8 +36,11 @@
     prev: root.querySelector('[data-bk-prev]'),
     next: root.querySelector('[data-bk-next]'),
     form: root.querySelector('[data-bk-form]'),
-    result: root.querySelector('[data-bk-result]')
+    result: root.querySelector('[data-bk-result]'),
+    handoffNote: root.querySelector('[data-handoff-note]')
   };
+
+  if (els.handoffNote) els.handoffNote.hidden = !P.handoff;
 
   /* ------------------------------------------------------------- helpers -- */
   function fmtDate(isoStr, opts) {
@@ -60,12 +63,20 @@
 
   /* Patients don't pick a therapist — the clinic assigns whoever is
      available, so the "who would you like to see" step is always
-     dropped from the flow and from the progress bar. */
-  function visibleSteps() { return [1, 3, 4, 5]; }
+     dropped from the flow and from the progress bar. With a hand-off
+     provider (e.g. Cal.com), our own date/time and details steps are
+     dropped too: Cal.com collects all of that on its own page. */
+  function visibleSteps() { return P.handoff ? [1] : [1, 3, 4, 5]; }
 
   function assignAnyTherapist() {
     state.therapistId = 'any';
     state.therapistName = t('booking.anyTherapist');
+  }
+
+  /* Send the patient on to the scheduling partner for the real date,
+     time and details. Only used when the active provider sets `handoff`. */
+  function goToScheduling() {
+    window.location.href = P.schedulingUrl({ serviceId: state.serviceId });
   }
 
   function buildProgress() {
@@ -334,6 +345,7 @@
   els.next.addEventListener('click', function () {
     if (!canAdvance()) return;
     if (state.step === 1) {
+      if (P.handoff) { goToScheduling(); return; }
       loadTherapists().then(function () {
         assignAnyTherapist();
         loadDays();
@@ -397,7 +409,11 @@
       if (sb) sb.click();
     }
 
-    if (state.serviceId) {
+    if (P.handoff) {
+      /* Stay on step 1 even if a link preselected the session — the
+         patient still has to click Continue before leaving the site. */
+      updateNav();
+    } else if (state.serviceId) {
       assignAnyTherapist(); loadDays(); show(3);
     } else {
       updateNav();
